@@ -25,20 +25,20 @@ class Perfil(object):
 class Perfil_VIP(Perfil):
 
     def __init__(self, nome, telefone, empresa, apelido):
-        super(Perfil_VIP,self).__init__(nome, telefone, empresa)
+        self.super_class = super(Perfil_VIP, self)
+        self.super_class.__init__(nome, telefone, empresa)
         self.apelido = apelido
 
     def get_creditos(self):
-        return super(Perfil_VIP,self).get_like() * 10.0
+        return self.super_class.get_like() * 10.0
 
     def to_string(self):
 
-        ref_ao_pai = super(Perfil_VIP,self)
 
         print('Nome: %s, Telefone: %s, Empresa: %s, Total de curtidas: %d, Apelido: %s' % (self.nome,
                                                                                            self.telefone,
                                                                                            self.empresa,
-                                                                                           ref_ao_pai.get_like(),
+                                                                                           self.super_class.get_like(),
                                                                                            self.apelido))
 
 
