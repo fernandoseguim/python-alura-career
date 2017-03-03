@@ -22,9 +22,22 @@ class Perfil(object):
     def get_like(self):
         return self.__curtidas
 
+    @classmethod
+    def create_profile_from_csv(classe, path_file):
+
+        file = open(path_file, 'r')
+        profiles = []
+
+        for line in file:
+            values = line.split(',')
+            profiles.append(Perfil(*values))
+        file.close()
+
+        return profiles
+
 class Perfil_VIP(Perfil):
 
-    def __init__(self, nome, telefone, empresa, apelido):
+    def __init__(self, nome, telefone, empresa,apelido=''):
         self.super_class = super(Perfil_VIP, self)
         self.super_class.__init__(nome, telefone, empresa)
         self.apelido = apelido
