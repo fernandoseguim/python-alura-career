@@ -34,14 +34,11 @@ class Perfil_VIP(Perfil):
 
     def to_string(self):
 
-
         print('Nome: %s, Telefone: %s, Empresa: %s, Total de curtidas: %d, Apelido: %s' % (self.nome,
                                                                                            self.telefone,
                                                                                            self.empresa,
                                                                                            self.super_class.get_like(),
                                                                                            self.apelido))
-
-
 
 class Data(object):
 
@@ -60,4 +57,6 @@ class Pessoa(object):
     def calc_imc(self):
         imc = self.peso / pow(self.altura,2)
         print('IMC do %s é %.2f' % (self.nome, imc))
+
+
 

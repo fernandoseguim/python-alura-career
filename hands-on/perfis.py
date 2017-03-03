@@ -1,4 +1,4 @@
-from models import Perfil, Data
+from exercicios.models import Perfil, Data
 
 perfil1 = Perfil('Fernando Seguim', '11982646822', 'Freela')
 perfil2 = Perfil('Gabriela Orselli', '11953494000', 'Automatos')
