@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from exercicios.models import Pessoa
+from models import Pessoa
 
 pessoa = Pessoa('Fernando Seguim', 190, 1.84)
 

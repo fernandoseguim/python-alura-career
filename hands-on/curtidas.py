@@ -1,4 +1,4 @@
-from exercicios.models import Perfil, Perfil_VIP
+from models import Perfil, Perfil_VIP
 
 usuario = Perfil('Jhon Doe', '11999999999', 'ACME')
 
