@@ -8,6 +8,9 @@ class Perfil(object):
     'Classe padrão para perfis de usuários'
 
     def __init__(self, nome, telefone, empresa):
+        if(len(nome) < 3):
+            raise InvalidArgumentError("nome deve ter pelo menos 3 caracteres")
+
         self.nome = nome
         self.telefone = telefone
         self.empresa = empresa
@@ -30,7 +33,10 @@ class Perfil(object):
 
         for line in file:
             values = line.split(',')
+            if(len(values) is not 3):
+                raise ValueError('Uma linha no arquivo %s deve conter 3 valores' % path_file)
             profiles.append(Perfil(*values))
+
         file.close()
 
         return profiles
@@ -53,6 +59,14 @@ class Perfil_VIP(Perfil):
                                                                                            self.super_class.get_like(),
                                                                                            self.apelido))
 
+class InvalidArgumentError(Exception):
+
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return repr(self.message)
+
 class Data(object):
 
     def __init__(self, dia, mes, ano):
@@ -70,6 +84,5 @@ class Pessoa(object):
     def calc_imc(self):
         imc = self.peso / pow(self.altura,2)
         print('IMC do %s é %.2f' % (self.nome, imc))
-
 
 
