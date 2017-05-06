@@ -38,12 +38,90 @@ def check_shot(shot, secret_word, list_letters):
         index += 1
 
 
-def print_result(hit):
+def print_message_to_loser(secret_word):
+    print("Puxa, você foi enforcado!")
+    print("A palavra era {}".format(secret_word))
+    print("    _______________         ")
+    print("   /               \       ")
+    print("  /                 \      ")
+    print("//                   \/\  ")
+    print("\|   XXXX     XXXX   | /   ")
+    print(" |   XXXX     XXXX   |/     ")
+    print(" |   XXX       XXX   |      ")
+    print(" |                   |      ")
+    print(" \__      XXX      __/     ")
+    print("   |\     XXX     /|       ")
+    print("   | |           | |        ")
+    print("   | I I I I I I I |        ")
+    print("   |  I I I I I I  |        ")
+    print("   \_             _/       ")
+    print("     \_         _/         ")
+    print("       \_______/           ")
 
-    if hit:
-        print("Parabéns! Você acertou todas as letras da palavra!")
-    else:
-        print("Você perdeu! Errou todas as suas tentativas!!")
+
+def print_message_to_winner():
+    print("Parabéns, você ganhou!")
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
+
+
+def print_fork(errors):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(errors == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(errors == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if(errors == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(errors == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(errors == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(errors == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (errors == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
 
 
 def fork():
@@ -67,12 +145,15 @@ def fork():
 
         else:
             errors += 1
-            print("Ops, você errou a letra! Faltam {} tentativas!".format(6-errors))
+            print_fork(errors)
 
-        forked = errors == 6
+        forked = errors == 7
         hit = "_" not in letters_sucessful
 
-    print_result(hit)
+    if forked:
+        print_message_to_loser(secret_word)
+    elif hit:
+        print_message_to_winner()
 
     print_header_or_footer("footer")
 
