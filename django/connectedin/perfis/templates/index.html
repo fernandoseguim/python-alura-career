@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Index</h1>
+
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Todos os perfis</strong>
+        </div>
+
+    {% if perfis %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Profissão</th>
+                <th>Telefone</th>
+                <th>Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perfil in perfis %}
+            <tr>
+                <td><a href="{% url 'view' perfil.id %}"> {{ perfil.name}} </a></td>
+                <td>{{ perfil.email }}</td>
+                <td>{{ perfil.job }}</td>
+                <td>{{ perfil.phone_number | default:'Telefone não informado'}}</td>
+                <td>{{ perfil.company_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Nenhum perfil encontrado</p>
+    {% endif %}
+    </div>
+
+    <div class="panel panel-default">
+        {% with total_invites=current_user.invite_received.count %}
+
+            {% if total_invites %}
+
+                <div class="panel-heading">
+                    <strong>Você tem {{ total_invites }} convite{{ total_invites | pluralize }} aguardando aprovação</strong>
+                </div>
+                <ul class="list-group">
+                    {% for invite in current_user.invite_received.all %}
+                        <li class="list-group-item">
+                            {{ invite.requester.name }}
+                            <a href="{% url 'accept' invite.id %}" class="pull-right">aceitar</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% else %}
+                <div class="panel-body">
+                    <p>Nenhum convite recebido =(</p>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+    <div class="panel panel-default">
+        {% with total_contacts=current_user.contacts.count %}
+
+            {% if total_contacts %}
+
+                <div class="panel-heading">
+                    <strong>Você tem {{ total_contacts }} contato{{ total_contacts | pluralize }}</strong>
+                </div>
+                <ul class="list-group">
+                    {% for contact in current_user.contacts.all %}
+                        <li class="list-group-item">
+                            <a href="{% url 'view' contact.id %}">{{ contact.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% else %}
+                <div class="panel-body">
+                    <p>Você não possui contatos no momento =(</p>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+</div>
+{% endblock %}
